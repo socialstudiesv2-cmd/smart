@@ -1,12 +1,4 @@
-<!DOCTYPE html>
-<html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Smart Academy</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React + ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
@@ -72,36 +64,3 @@
       }
 
       function App() {
-        const [openGrade, setOpenGrade] = React.useState(null);
-
-        return (
-          <div className="max-w-3xl mx-auto px-4 py-8">
-            <header className="mb-8 text-center text-white">
-              <h1 className="text-4xl font-extrabold drop-shadow">
-                <span className="text-yellow-300">Smart Academy</span>
-              </h1>
-              <p className="text-gray-100 mt-2">
-                رحلة ممتعة في عالم المعرفة مع مستر إيهاب
-              </p>
-            </header>
-
-            <div className="space-y-4">
-              {Object.entries(DATA).map(([grade, lessons]) => (
-                <GradeCard
-                  key={grade}
-                  grade={grade}
-                  lessons={lessons}
-                  isOpen={openGrade === grade}
-                  onClick={() => setOpenGrade(openGrade === grade ? null : grade)}
-                />
-              ))}
-            </div>
-          </div>
-        );
-      }
-
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<App />);
-    </script>
-  </body>
-</html>
