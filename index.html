@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Smart Academy</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- React + ReactDOM -->
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <!-- Babel -->
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+  </head>
+  <body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen">
+    <div id="root"></div>
+
+    <script type="text/babel">
+      const DATA = {
+        "الصف الرابع الابتدائي": [
+          { name: "نهر النيل وأثره على قيام الحضارة", url: "https://example.com/lesson1" },
+          { name: "الأنشطة الاقتصادية في مصر", url: "https://example.com/lesson2" },
+        ],
+        "الصف الخامس الابتدائي": [
+          { name: "الحياة الاجتماعية في مصر القديمة", url: "https://example.com/lesson3" },
+          { name: "الأنشطة الاقتصادية في مصر القديمة", url: "https://example.com/lesson4" },
+        ],
+        "الصف السادس الابتدائي": [
+          { name: "قناة السويس وأهميتها", url: "https://example.com/lesson5" },
+          { name: "ثورة 1919", url: "https://example.com/lesson6" },
+        ],
+        "الصف الأول الإعدادي": [
+          { name: "البيئة الصحراوية في مصر", url: "https://example.com/lesson7" },
+          { name: "البيئة الزراعية", url: "https://example.com/lesson8" },
+        ],
+        "الصف الثاني الإعدادي": [
+          { name: "محمد علي وبناء الدولة الحديثة", url: "https://example.com/lesson9" },
+          { name: "تطور التعليم في مصر", url: "https://example.com/lesson10" },
+        ],
+        "الصف الثالث الإعدادي": [
+          { name: "ثورة يوليو 1952", url: "https://example.com/lesson11" },
+          { name: "الخريطة السياسية للوطن العربي", url: "https://example.com/lesson12" },
+        ],
+      };
+
+      function GradeCard({ grade, lessons, isOpen, onClick }) {
+        return (
+          <div className="rounded-2xl bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg overflow-hidden">
+            <button
+              onClick={onClick}
+              className="w-full flex justify-between items-center px-5 py-4 text-white font-bold text-lg hover:bg-white/10 transition"
+            >
+              {grade}
+              <span className={`transform transition ${isOpen ? "rotate-180" : ""}`}>⌄</span>
+            </button>
+            {isOpen && (
+              <div className="bg-white/10 border-t border-white/20">
+                {lessons.map((lesson, i) => (
+                  <a
+                    key={i}
+                    href={lesson.url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-6 py-3 text-sm text-gray-100 hover:bg-white/20 cursor-pointer"
+                  >
+                    📘 {lesson.name}
+                  </a>
+                ))}
+              </div>
+            )}
+          </div>
+        );
+      }
+
+      function App() {
+        const [openGrade, setOpenGrade] = React.useState(null);
+
+        return (
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <header className="mb-8 text-center text-white">
+              <h1 className="text-4xl font-extrabold drop-shadow">
+                <span className="text-yellow-300">Smart Academy</span>
+              </h1>
+              <p className="text-gray-100 mt-2">
+                رحلة ممتعة في عالم المعرفة مع مستر إيهاب
+              </p>
+            </header>
+
+            <div className="space-y-4">
+              {Object.entries(DATA).map(([grade, lessons]) => (
+                <GradeCard
+                  key={grade}
+                  grade={grade}
+                  lessons={lessons}
+                  isOpen={openGrade === grade}
+                  onClick={() => setOpenGrade(openGrade === grade ? null : grade)}
+                />
+              ))}
+            </div>
+          </div>
+        );
+      }
+
+      const root = ReactDOM.createRoot(document.getElementById("root"));
+      root.render(<App />);
+    </script>
+  </body>
+</html>
