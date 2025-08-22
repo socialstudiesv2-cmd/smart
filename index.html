@@ -2,31 +2,14 @@
 <html lang="ar" dir="rtl">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smart Academy - مع مستر إيهاب</title>
-    <!-- Tailwind CSS -->
+    <title>Smart Academy مع مستر إيهاب</title>
+    <!-- Tailwind CSS CDN -->
     <script src="https://cdn.tailwindcss.com"></script>
     <!-- React + ReactDOM -->
     <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
     <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
     <!-- Babel -->
     <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-    <style>
-      /* Animation للعنوان */
-      @keyframes fadeZoom {
-        0% {
-          opacity: 0;
-          transform: scale(0.8);
-        }
-        100% {
-          opacity: 1;
-          transform: scale(1);
-        }
-      }
-      .fade-zoom {
-        animation: fadeZoom 1.5s ease-out forwards;
-      }
-    </style>
   </head>
   <body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen">
     <div id="root"></div>
@@ -34,28 +17,28 @@
     <script type="text/babel">
       const DATA = {
         "الصف الرابع الابتدائي": [
-          { title: "الكتاب المدرسي", url: "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary4/Term1/StudentBook/Social_prim4_T1.pdf" },
-          { title: "الأنشطة الاقتصادية في مصر", url: "#" },
+          { name: "الكتاب المدرسي - دراسات اجتماعية", link: "https://elearnningcontent.blob.core.windows.net/elearnningcontent/2026/Primary/Primary4/Term1/StudentBook/Social_prim4_T1.pdf" },
+          { name: "الأنشطة الاقتصادية في مصر", link: "https://example.com/economy" },
         ],
         "الصف الخامس الابتدائي": [
-          { title: "الحياة الاجتماعية في مصر القديمة", url: "#" },
-          { title: "الأنشطة الاقتصادية في مصر القديمة", url: "#" },
+          { name: "الحياة الاجتماعية في مصر القديمة", link: "https://example.com/social" },
+          { name: "الأنشطة الاقتصادية في مصر القديمة", link: "https://example.com/old-economy" },
         ],
         "الصف السادس الابتدائي": [
-          { title: "قناة السويس وأهميتها", url: "#" },
-          { title: "ثورة 1919", url: "#" },
+          { name: "قناة السويس وأهميتها", link: "https://example.com/suez" },
+          { name: "ثورة 1919", link: "https://example.com/1919" },
         ],
         "الصف الأول الإعدادي": [
-          { title: "البيئة الصحراوية في مصر", url: "#" },
-          { title: "البيئة الزراعية", url: "#" },
+          { name: "البيئة الصحراوية في مصر", link: "https://example.com/desert" },
+          { name: "البيئة الزراعية", link: "https://example.com/farming" },
         ],
         "الصف الثاني الإعدادي": [
-          { title: "محمد علي وبناء الدولة الحديثة", url: "#" },
-          { title: "تطور التعليم في مصر", url: "#" },
+          { name: "محمد علي وبناء الدولة الحديثة", link: "https://example.com/mohamed-ali" },
+          { name: "تطور التعليم في مصر", link: "https://example.com/education" },
         ],
         "الصف الثالث الإعدادي": [
-          { title: "ثورة يوليو 1952", url: "#" },
-          { title: "الخريطة السياسية للوطن العربي", url: "#" },
+          { name: "ثورة يوليو 1952", link: "https://example.com/1952" },
+          { name: "الخريطة السياسية للوطن العربي", link: "https://example.com/map" },
         ],
       };
 
@@ -64,34 +47,26 @@
           <div className="rounded-2xl bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg overflow-hidden">
             <button
               onClick={onClick}
-              className="w-full flex justify-between items-center px-4 py-4 text-white font-bold text-xl sm:text-2xl hover:bg-white/10 transition"
+              className="w-full flex justify-between items-center px-5 py-4 text-white font-bold text-xl hover:bg-white/10 transition"
             >
               {grade}
-              <span
-                className={`transform transition-transform duration-300 ${
-                  isOpen ? "rotate-180" : ""
-                }`}
-              >
-                ⌄
-              </span>
+              <span className={`transform transition ${isOpen ? "rotate-180" : ""}`}>⌄</span>
             </button>
-            <div
-              className={`transition-all duration-500 ease-in-out overflow-hidden ${
-                isOpen ? "max-h-96 opacity-100" : "max-h-0 opacity-0"
-              }`}
-            >
+            {isOpen && (
               <div className="bg-white/10 border-t border-white/20">
                 {lessons.map((lesson, i) => (
                   <a
                     key={i}
-                    href={lesson.url}
-                    className="block px-5 py-3 text-base sm:text-lg text-gray-100 hover:bg-white/20 cursor-pointer"
+                    href={lesson.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="block px-6 py-3 text-lg text-gray-100 hover:bg-white/20 cursor-pointer"
                   >
-                    📘 {lesson.title}
+                    📘 {lesson.name}
                   </a>
                 ))}
               </div>
-            </div>
+            )}
           </div>
         );
       }
@@ -100,26 +75,22 @@
         const [openGrade, setOpenGrade] = React.useState(null);
 
         return (
-          <div className="max-w-5xl mx-auto px-3 py-6 sm:py-10">
-            <header className="mb-10 text-center text-white">
-              <h1 className="fade-zoom text-4xl sm:text-6xl font-extrabold drop-shadow-lg">
-                Smart <span className="text-yellow-300">Academy</span>
+          <div className="max-w-3xl mx-auto px-4 py-8">
+            <header className="mb-8 text-center text-white">
+              <h1 className="text-5xl font-extrabold drop-shadow">
+                <span className="text-yellow-300">Smart Academy</span>
               </h1>
-              <p className="fade-zoom text-gray-100 mt-4 text-lg sm:text-2xl">
-                متعة التعلم و المعرفة مع - مستر إيهاب أشرف 
-              </p>
+              <p className="text-gray-100 mt-3 text-xl">مع مستر إيهاب - دروسك بشكل عصري وأنيق</p>
             </header>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div className="space-y-4">
               {Object.entries(DATA).map(([grade, lessons]) => (
                 <GradeCard
                   key={grade}
                   grade={grade}
                   lessons={lessons}
                   isOpen={openGrade === grade}
-                  onClick={() =>
-                    setOpenGrade(openGrade === grade ? null : grade)
-                  }
+                  onClick={() => setOpenGrade(openGrade === grade ? null : grade)}
                 />
               ))}
             </div>
