@@ -10,39 +10,51 @@
     :root{
       --blue-1:#0ea5ff;
       --blue-2:#0866d8;
-      --bg:#f6f9ff;
+      --bg:linear-gradient(180deg,#7b5c3b,#c2a87a);
       --card:#ffffff;
       --muted:#6b7280;
       --radius:14px;
       font-family: 'Cairo', sans-serif;
     }
     *{box-sizing:border-box}
-    body{margin:0;background:var(--bg);color:#0b1220}
-    .container{max-width:1100px;margin:30px auto;padding:0 18px}/* header */
+    body{margin:0;background:var(--bg);color:#0b1220;position:relative;overflow-x:hidden}/* خلفية رموز هيروغليفية شبه شفافة */
+body::before{
+  content:"";
+  position:absolute;inset:0;
+  background-image:url('https://upload.wikimedia.org/wikipedia/commons/3/3f/Hieroglyphs_from_the_tomb_of_Seti_I.jpg');
+  background-size:cover;
+  background-repeat:repeat;
+  opacity:0.08;
+  pointer-events:none;
+}
+
+.container{max-width:1100px;margin:30px auto;padding:0 18px;position:relative;z-index:1}
+
+/* header */
 header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
 .brand{display:flex;align-items:center;gap:12px}
-.logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--blue-2),var(--blue-1));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+.logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,#a17549,#c2a87a);display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
 .search{flex:1;display:flex;align-items:center}
 .search input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #e6eefc;background:white}
 
 /* hero */
-.hero{background:linear-gradient(180deg,var(--blue-1),#2fb0ff 60%);color:white;border-radius:18px;padding:48px 28px;box-shadow:0 8px 30px rgba(10,80,150,0.12);margin-bottom:28px}
+.hero{background:rgba(255,255,255,0.1);backdrop-filter:blur(6px);color:white;border-radius:18px;padding:48px 28px;box-shadow:0 8px 30px rgba(0,0,0,0.25);margin-bottom:28px}
 .hero-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:center}
 .hero h1{font-size:36px;margin:0 0 12px}
 .hero p{margin:0 0 20px;opacity:0.95}
 .hero .cta{display:flex;gap:12px}
 .btn{padding:12px 18px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
 .btn.ghost{background:rgba(255,255,255,0.12);color:white}
-.btn.primary{background:white;color:var(--blue-2)}
+.btn.primary{background:white;color:#7b5c3b}
 .stats{display:flex;gap:18px;margin-top:22px}
-.stat{display:flex;flex-direction:column;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,0.06)}
+.stat{display:flex;flex-direction:column;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,0.15)}
 .stat strong{font-size:18px}
 
 /* sections */
 .section{background:var(--card);border-radius:16px;padding:26px;margin-bottom:26px}
 .section h2{margin:0 0 12px}
 .grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
-.card{background:linear-gradient(180deg,white,#fbfdff);padding:18px;border-radius:12px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 20px rgba(15,36,63,0.04);border:1px solid #eef6ff}
+.card{background:linear-gradient(180deg,white,#fbfdff);padding:18px;border-radius:12px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 20px rgba(15,36,63,0.08);border:1px solid #eef6ff}
 .card .icon{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
 .card .meta{flex:1}
 .card .meta h3{margin:0;font-size:16px}
