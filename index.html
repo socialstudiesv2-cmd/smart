@@ -1,105 +1,169 @@
-<!DOCTYPE html>
+<!doctype html>
+
 <html lang="ar" dir="rtl">
-  <head>
-    <meta charset="UTF-8" />
-    <title>Smart Academy مع مستر إيهاب</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
-    <!-- React + ReactDOM -->
-    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
-    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
-    <!-- Babel -->
-    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
-  </head>
-  <body class="bg-gradient-to-r from-indigo-500 via-purple-500 to-pink-500 min-h-screen">
-    <div id="root"></div>
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>مستر إيهاب أشرف - دروس التاريخ والجغرافيا</title>
+  <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root{
+      --blue-1:#0ea5ff;
+      --blue-2:#0866d8;
+      --bg:#f6f9ff;
+      --card:#ffffff;
+      --muted:#6b7280;
+      --radius:14px;
+      font-family: 'Cairo', sans-serif;
+    }
+    *{box-sizing:border-box}
+    body{margin:0;background:var(--bg);color:#0b1220}
+    .container{max-width:1100px;margin:30px auto;padding:0 18px}/* header */
+header{display:flex;align-items:center;justify-content:space-between;gap:12px;margin-bottom:22px}
+.brand{display:flex;align-items:center;gap:12px}
+.logo{width:48px;height:48px;border-radius:12px;background:linear-gradient(135deg,var(--blue-2),var(--blue-1));display:flex;align-items:center;justify-content:center;color:white;font-weight:700}
+.search{flex:1;display:flex;align-items:center}
+.search input{width:100%;padding:10px 14px;border-radius:10px;border:1px solid #e6eefc;background:white}
 
-    <script type="text/babel">
-      const DATA = {
-        "الصف الرابع الابتدائي": [
-          { name: "كتاب الشاطر - دراسات اجتماعية", link: "https://drive.google.com/file/d/1MNW-F6AQSTGBGj7Fh1ni5rDnaGdVVEcK/view?pli=1" },
-          { name: "الأنشطة الاقتصادية في مصر", link: "https://example.com/economy" },
-        ],
-        "الصف الخامس الابتدائي": [
-          { name: "الحياة الاجتماعية في مصر القديمة", link: "https://example.com/social" },
-          { name: "الأنشطة الاقتصادية في مصر القديمة", link: "https://example.com/old-economy" },
-        ],
-        "الصف السادس الابتدائي": [
-          { name: "قناة السويس وأهميتها", link: "https://example.com/suez" },
-          { name: "ثورة 1919", link: "https://example.com/1919" },
-        ],
-        "الصف الأول الإعدادي": [
-          { name: "البيئة الصحراوية في مصر", link: "https://example.com/desert" },
-          { name: "البيئة الزراعية", link: "https://example.com/farming" },
-        ],
-        "الصف الثاني الإعدادي": [
-          { name: "محمد علي وبناء الدولة الحديثة", link: "https://example.com/mohamed-ali" },
-          { name: "تطور التعليم في مصر", link: "https://example.com/education" },
-        ],
-        "الصف الثالث الإعدادي": [
-          { name: "ثورة يوليو 1952", link: "https://example.com/1952" },
-          { name: "الخريطة السياسية للوطن العربي", link: "https://example.com/map" },
-        ],
-      };
+/* hero */
+.hero{background:linear-gradient(180deg,var(--blue-1),#2fb0ff 60%);color:white;border-radius:18px;padding:48px 28px;box-shadow:0 8px 30px rgba(10,80,150,0.12);margin-bottom:28px}
+.hero-grid{display:grid;grid-template-columns:1fr 320px;gap:18px;align-items:center}
+.hero h1{font-size:36px;margin:0 0 12px}
+.hero p{margin:0 0 20px;opacity:0.95}
+.hero .cta{display:flex;gap:12px}
+.btn{padding:12px 18px;border-radius:10px;border:0;cursor:pointer;font-weight:600}
+.btn.ghost{background:rgba(255,255,255,0.12);color:white}
+.btn.primary{background:white;color:var(--blue-2)}
+.stats{display:flex;gap:18px;margin-top:22px}
+.stat{display:flex;flex-direction:column;align-items:center;padding:10px 12px;border-radius:12px;background:rgba(255,255,255,0.06)}
+.stat strong{font-size:18px}
 
-      function GradeCard({ grade, lessons, isOpen, onClick }) {
-        return (
-          <div className="rounded-2xl bg-white/20 backdrop-blur-lg border border-white/30 shadow-lg overflow-hidden">
-            <button
-              onClick={onClick}
-              className="w-full flex justify-between items-center px-5 py-4 text-white font-bold text-xl hover:bg-white/10 transition"
-            >
-              {grade}
-              <span className={`transform transition ${isOpen ? "rotate-180" : ""}`}>⌄</span>
-            </button>
-            {isOpen && (
-              <div className="bg-white/10 border-t border-white/20">
-                {lessons.map((lesson, i) => (
-                  <a
-                    key={i}
-                    href={lesson.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="block px-6 py-3 text-lg text-gray-100 hover:bg-white/20 cursor-pointer"
-                  >
-                    📘 {lesson.name}
-                  </a>
-                ))}
-              </div>
-            )}
-          </div>
-        );
-      }
+/* sections */
+.section{background:var(--card);border-radius:16px;padding:26px;margin-bottom:26px}
+.section h2{margin:0 0 12px}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:16px}
+.card{background:linear-gradient(180deg,white,#fbfdff);padding:18px;border-radius:12px;display:flex;align-items:center;gap:14px;box-shadow:0 6px 20px rgba(15,36,63,0.04);border:1px solid #eef6ff}
+.card .icon{width:56px;height:56px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:700}
+.card .meta{flex:1}
+.card .meta h3{margin:0;font-size:16px}
+.card .meta p{margin:6px 0 0;color:var(--muted);font-size:13px}
 
-      function App() {
-        const [openGrade, setOpenGrade] = React.useState(null);
+/* responsive */
+@media(max-width:980px){
+  .hero-grid{grid-template-columns:1fr}
+  .grid{grid-template-columns:repeat(2,1fr)}
+}
+@media(max-width:520px){
+  header{flex-direction:column;align-items:flex-start}
+  .grid{grid-template-columns:1fr}
+  .hero h1{font-size:26px}
+}
 
-        return (
-          <div className="max-w-3xl mx-auto px-4 py-8">
-            <header className="mb-8 text-center text-white">
-              <h1 className="text-5xl font-extrabold drop-shadow">
-                <span className="text-yellow-300">Smart Academy</span>
-              </h1>
-              <p className="text-gray-100 mt-3 text-xl">مع مستر إيهاب - دروسك بشكل عصري وأنيق</p>
-            </header>
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="brand">
+        <div class="logo">م.إ</div>
+        <div>
+          <div style="font-weight:700">مستر إيهاب أشرف</div>
+          <div style="font-size:12px;color:var(--muted)">دروس التاريخ والجغرافيا</div>
+        </div>
+      </div>
+      <div class="search">
+        <input placeholder="ابحث عن دروس التاريخ والجغرافيا...">
+      </div>
+      <div style="display:flex;gap:10px;align-items:center">
+        <button class="btn ghost">تسجيل الدخول</button>
+        <button class="btn primary">انضم الآن</button>
+      </div>
+    </header><section class="hero">
+  <div class="hero-grid">
+    <div>
+      <h1>تعلم التاريخ والجغرافيا<br>مع مستر إيهاب أشرف</h1>
+      <p>أفضل شروحات التاريخ والجغرافيا للثانوية العامة مع خبرة أكثر من 15 عامًا في التدريس.</p>
 
-            <div className="space-y-4">
-              {Object.entries(DATA).map(([grade, lessons]) => (
-                <GradeCard
-                  key={grade}
-                  grade={grade}
-                  lessons={lessons}
-                  isOpen={openGrade === grade}
-                  onClick={() => setOpenGrade(openGrade === grade ? null : grade)}
-                />
-              ))}
-            </div>
-          </div>
-        );
-      }
+      <div class="cta">
+        <button class="btn ghost">شاهد الدروس</button>
+        <button class="btn primary">ابدأ الآن</button>
+      </div>
 
-      const root = ReactDOM.createRoot(document.getElementById("root"));
-      root.render(<App />);
-    </script>
-  </body>
+      <div class="stats" aria-hidden>
+        <div class="stat"><div style="font-size:12px">500+</div><strong>درس مسجل</strong></div>
+        <div class="stat"><div style="font-size:12px">25K+</div><strong>طالب ناجح</strong></div>
+        <div class="stat"><div style="font-size:12px">15+</div><strong>سنة خبرة</strong></div>
+      </div>
+    </div>
+
+    <div style="display:flex;align-items:center;justify-content:center">
+      <!-- placeholder for hero illustration -->
+      <svg width="240" height="180" viewBox="0 0 240 180" fill="none" xmlns="http://www.w3.org/2000/svg">
+        <rect rx="16" width="240" height="180" fill="rgba(255,255,255,0.12)" />
+        <g fill="white" opacity="0.9">
+          <rect x="24" y="28" width="192" height="12" rx="6" />
+          <rect x="24" y="58" width="160" height="10" rx="5" />
+          <rect x="24" y="86" width="120" height="10" rx="5" />
+          <circle cx="200" cy="140" r="22" stroke="white" stroke-opacity="0.9" stroke-width="3" fill="transparent"/>
+        </g>
+      </svg>
+    </div>
+  </div>
+</section>
+
+<section class="section">
+  <h2>المواد والموضوعات</h2>
+  <p style="color:var(--muted);margin-top:6px">اختر من بين دروس التاريخ والجغرافيا المنظمة حسب الموضوعات والفترات التاريخية</p>
+
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <div class="icon" style="background:#ffd89b">👑</div>
+      <div class="meta"><h3>التاريخ القديم</h3><p>45 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#bde0fe">⏱️</div>
+      <div class="meta"><h3>التاريخ الحديث</h3><p>38 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#c3f6d9">🌍</div>
+      <div class="meta"><h3>الجغرافيا الطبيعية</h3><p>42 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#e7d7ff">🧭</div>
+      <div class="meta"><h3>الجغرافيا البشرية</h3><p>35 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#ffd0d0">🏛️</div>
+      <div class="meta"><h3>الحضارات</h3><p>28 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#d6f0ff">📘</div>
+      <div class="meta"><h3>التاريخ الإسلامي</h3><p>52 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#ffeed6">🗺️</div>
+      <div class="meta"><h3>الخرائط</h3><p>25 درس</p></div>
+    </div>
+
+    <div class="card">
+      <div class="icon" style="background:#e6e6e6">🏙️</div>
+      <div class="meta"><h3>المدن والعواصم</h3><p>31 درس</p></div>
+    </div>
+  </div>
+
+  <div style="text-align:center;margin-top:18px">
+    <button class="btn ghost">عرض جميع الموضوعات</button>
+  </div>
+</section>
+
+<footer style="text-align:center;color:var(--muted);font-size:14px;padding:18px 0">© 2025 مستر إيهاب أشرف — كل الحقوق محفوظة</footer>
+
+  </div>
+</body>
 </html>
