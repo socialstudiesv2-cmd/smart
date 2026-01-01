@@ -3,79 +3,169 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الدراسات الاجتماعية</title>
+    <title>رحلة إلى كنز توت عنخ آمون</title>
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700&display=swap" rel="stylesheet">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <h1><i class="fas fa-crown"></i> رحلة إلى كنز توت عنخ آمون</h1>
+            <p class="subtitle">أجب عن الأسئلة التاريخية لتخطي أعمدة المعبد والوصول إلى الكنز</p>
+        </header>
 
-    <header>
-        <div class="container">
-            <h1>🌍 الدراسات الاجتماعية</h1>
-            <p>منصتك التعليمية من الصف الرابع الابتدائي حتى الثالث الإعدادي</p>
-        </div>
-    </header>
-
-    <main class="container">
-        
-        <div id="grades-section">
-            <h2 class="section-title">اختر الصف الدراسي</h2>
-            <div class="grid" id="grades-container">
+        <div class="game-container">
+            <!-- لوحة معلومات اللعبة -->
+            <div class="game-info">
+                <div class="stats">
+                    <div class="stat">
+                        <span class="stat-label">الأسئلة المتبقية:</span>
+                        <span id="questions-left" class="stat-value">10</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">الأعمدة المتبقية:</span>
+                        <span id="pillars-left" class="stat-value">10</span>
+                    </div>
+                    <div class="stat">
+                        <span class="stat-label">النتيجة:</span>
+                        <span id="score" class="stat-value">0</span>
+                    </div>
                 </div>
-        </div>
-
-        <div id="curriculum-section" class="hidden">
-            <button onclick="goBack()" class="back-btn">⬅ العودة للصفوف</button>
-            <h2 id="selected-grade-title" class="section-title"></h2>
-            <div id="units-container">
+                
+                <div class="progress-container">
+                    <div class="progress-bar">
+                        <div id="progress" class="progress-fill"></div>
+                    </div>
+                    <div class="progress-label">تقدم الرحلة: <span id="progress-text">0%</span></div>
                 </div>
+            </div>
+
+            <!-- منطقة الأعمدة -->
+            <div class="temple-area">
+                <div class="temple-background">
+                    <div class="pillars-container" id="pillars-container">
+                        <!-- الأعمدة ستتم إضافتها ديناميكيًا بواسطة JavaScript -->
+                    </div>
+                    
+                    <div class="treasure-chamber">
+                        <div class="treasure" id="treasure">
+                            <i class="fas fa-gem"></i>
+                            <div class="treasure-label">كنز توت عنخ آمون</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- منطقة السؤال -->
+            <div class="question-area" id="question-area">
+                <div class="question-header">
+                    <h2 id="question-number">السؤال 1</h2>
+                    <div class="category-tag" id="question-category">التاريخ الفرعوني</div>
+                </div>
+                
+                <div class="question-text" id="question-text">
+                    جاري تحميل السؤال...
+                </div>
+                
+                <div class="answers-container" id="answers-container">
+                    <!-- الإجابات ستتم إضافتها ديناميكيًا -->
+                </div>
+                
+                <div class="feedback" id="feedback">
+                    <!-- ردود الفعل على الإجابة ستظهر هنا -->
+                </div>
+                
+                <div class="controls">
+                    <button id="next-btn" class="btn next-btn" disabled>
+                        <i class="fas fa-arrow-right"></i> السؤال التالي
+                    </button>
+                    <button id="hint-btn" class="btn hint-btn">
+                        <i class="fas fa-lightbulb"></i> مساعدة
+                    </button>
+                    <button id="restart-btn" class="btn restart-btn">
+                        <i class="fas fa-redo"></i> إعادة بدء اللعبة
+                    </button>
+                </div>
+            </div>
+
+            <!-- شاشة البداية -->
+            <div class="start-screen" id="start-screen">
+                <div class="start-content">
+                    <h2><i class="fas fa-landmark"></i> رحلة تاريخية في مصر القديمة</h2>
+                    <p>في هذه اللعبة، ستكون مستكشفًا تحاول الوصول إلى كنز توت عنخ آمون المخفي في أعماق المعبد الفرعوني.</p>
+                    <p>لكن الطريق محفوف بالتحديات! أمامك 10 أعمدة يجب تخطيها، ولكل عمود سؤال تاريخي يجب الإجابة عليه.</p>
+                    <p>كل إجابة صحيحة تقربك أكثر من الكنز، والإجابة الخاطئة ستجبرك على العودة للوراء.</p>
+                    
+                    <div class="instructions">
+                        <h3><i class="fas fa-info-circle"></i> طريقة اللعب:</h3>
+                        <ul>
+                            <li>أجب على الأسئلة التاريخية باختيار الإجابة الصحيحة</li>
+                            <li>كل إجابة صحيحة تتخطى عمودًا وتكسبك 10 نقاط</li>
+                            <li>كل إجابة خاطئة ترجعك عمودًا للخلف وتخسرك 5 نقاط</li>
+                            <li>لكل سؤال، يمكنك استخدام مساعدة مرة واحدة</li>
+                            <li>الهدف هو الوصول إلى الكنز بعد تخطي جميع الأعمدة</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="player-setup">
+                        <label for="player-name">أدخل اسمك:</label>
+                        <input type="text" id="player-name" placeholder="اسم المستكشف" value="المستكشف الشجاع">
+                    </div>
+                    
+                    <button id="start-btn" class="btn start-btn">
+                        <i class="fas fa-play"></i> ابدأ الرحلة
+                    </button>
+                </div>
+            </div>
+
+            <!-- شاشة النهاية -->
+            <div class="end-screen" id="end-screen" style="display: none;">
+                <div class="end-content">
+                    <h2 id="end-title">تهانينا! لقد وجدت الكنز</h2>
+                    <div class="end-icon" id="end-icon">
+                        <i class="fas fa-trophy"></i>
+                    </div>
+                    
+                    <div class="final-stats">
+                        <div class="final-stat">
+                            <span class="final-stat-label">اسم اللاعب:</span>
+                            <span id="final-player-name" class="final-stat-value">المستكشف الشجاع</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-label">النتيجة النهائية:</span>
+                            <span id="final-score" class="final-stat-value">0</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-label">عدد الأسئلة الصحيحة:</span>
+                            <span id="correct-answers" class="final-stat-value">0</span>
+                        </div>
+                        <div class="final-stat">
+                            <span class="final-stat-label">وقت اللعب:</span>
+                            <span id="play-time" class="final-stat-value">00:00</span>
+                        </div>
+                    </div>
+                    
+                    <p id="end-message">لقد أظهرت معرفة تاريخية رائعة واستحققت كنز توت عنخ آمون!</p>
+                    
+                    <div class="end-buttons">
+                        <button id="play-again-btn" class="btn play-again-btn">
+                            <i class="fas fa-redo"></i> العب مرة أخرى
+                        </button>
+                        <button id="share-btn" class="btn share-btn">
+                            <i class="fas fa-share-alt"></i> شارك النتيجة
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
 
-    </main>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © 2024 - منصة الدراسات الاجتماعية</p>
-    </footer>
+        <footer>
+            <p>لعبة تعليمية تاريخية مصممة لتعليم التاريخ الفرعوني بطريقة تفاعلية</p>
+            <p class="copyright">© 2023 رحلة إلى كنز توت عنخ آمون</p>
+        </footer>
+    </div>
 
     <script src="script.js"></script>
 </body>
-  </html><!DOCTYPE html>
-<html lang="ar" dir="rtl">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>منصة الدراسات الاجتماعية</title>
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <header>
-        <div class="container">
-            <h1>🌍 الدراسات الاجتماعية</h1>
-            <p>منصتك التعليمية من الصف الرابع الابتدائي حتى الثالث الإعدادي</p>
-        </div>
-    </header>
-
-    <main class="container">
-        
-        <div id="grades-section">
-            <h2 class="section-title">اختر الصف الدراسي</h2>
-            <div class="grid" id="grades-container">
-                </div>
-        </div>
-
-        <div id="curriculum-section" class="hidden">
-            <button onclick="goBack()" class="back-btn">⬅ العودة للصفوف</button>
-            <h2 id="selected-grade-title" class="section-title"></h2>
-            <div id="units-container">
-                </div>
-        </div>
-
-    </main>
-
-    <footer>
-        <p>جميع الحقوق محفوظة © 2024 - منصة الدراسات الاجتماعية</p>
-    </footer>
-
-    <script src="script.js"></script>
-</body>
-  </html>
+</html>
